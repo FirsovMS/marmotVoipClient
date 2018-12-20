@@ -5,6 +5,7 @@ using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MarmotVoipClient.UI.ViewModel
@@ -86,26 +87,6 @@ namespace MarmotVoipClient.UI.ViewModel
 			PropertiesCommand = new DelegateCommand(OnPropertiesCommandExecute);
 			SendCommand = new DelegateCommand(OnSendCommandExecute);
 			ContectInfoCommand = new DelegateCommand(OnUserInfoCommandExecute);
-
-			eventAggregator.GetEvent<OpenMessageDialogViewEvent>()
-				.Subscribe(AfterOpenMessageDialog);
-		}
-
-		// TODO: Implement load stored in database messages
-		public void Load(int contactId)
-		{
-			throw new NotImplementedException();
-
-			//var friend = await friendDataService.GetByIdAsync(friendId);
-			//Friend = new FriendWrapper(friend);
-			//Friend.PropertyChanged += (s, e) =>
-			//{
-			//	if (e.PropertyName == nameof(Friend.HasErrors))
-			//	{
-			//		((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-			//	}
-			//};
-			//((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
 		}
 
 		private void OnUserInfoCommandExecute()
@@ -118,10 +99,9 @@ namespace MarmotVoipClient.UI.ViewModel
 			throw new NotImplementedException();
 		}
 
-		// TODO: Load contact messages
-		private void AfterOpenMessageDialog(int contactId)
+		public Task LoadAsync(int contactId)
 		{
-			
+			throw new NotImplementedException();
 		}
 
 		private void UpdateSendIcon()

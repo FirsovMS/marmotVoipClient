@@ -1,16 +1,24 @@
 ﻿using Addititonals.Helpers;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MarmotVoipClient.Model.Data
 {
 	public class Contact : ICloneable
 	{
+		[Key]
 		public int Id { get; private set; }
 
+		[Required]
+		[StringLength(45)]
 		public string FirstName { get; set; }
 
+		[Required]
+		[StringLength(45)]
 		public string LastName { get; set; }
 
+		[Required]
+		[StringLength(45)]
 		public string Sip { get; set; }
 
 		public Contact(string firstName, string lastName, string sip)

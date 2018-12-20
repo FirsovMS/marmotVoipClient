@@ -1,7 +1,9 @@
-﻿namespace MarmotVoipClient.UI.ViewModel
+﻿using System.Threading.Tasks;
+
+namespace MarmotVoipClient.UI.ViewModel
 {
 	public interface IMessageDialogViewModel
 	{
-		void Load(int contactId);
+		Task LoadAsync(int contactId);
 	}
 }

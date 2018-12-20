@@ -33,7 +33,7 @@ namespace DAL
 			}
 			catch (Exception ex)
 			{
-				Logger.Error("Can't execute TryExecuteUpdateAsync!", ex, Level.Error, query);
+				Logger.Error("Can't execute TryExecuteUpdate!", ex, Level.Error, query);
 			}
 
 			return result;
