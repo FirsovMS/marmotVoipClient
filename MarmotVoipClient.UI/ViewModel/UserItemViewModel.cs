@@ -1,29 +1,64 @@
-﻿using System.Drawing;
+﻿using MarmotVoipClient.Model;
+using System;
 
 namespace MarmotVoipClient.UI.ViewModel
 {
 	public class UserItemViewModel : ViewModelBase
 	{
-		private string displayMember;
-
-		public Color Color { get; }
+		private Gliph gliph;
+		private string displayName;
+		private DateTime date;
+		private LastMessage lastMessage;
 
 		public int Id { get; }
 
-		public string DisplayMember
+		public string DisplayName
 		{
-			get { return displayMember; }
+			get { return displayName; }
 			private set
 			{
-				displayMember = value;
+				displayName = value;
 				OnPropertyChanged();
 			}
 		}
 
-		public UserItemViewModel(int id, string displayMember)
+		public Gliph Gliph
+		{
+			get { return gliph; }
+			set
+			{
+				gliph = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public DateTime Date
+		{
+			get { return date; }
+			set
+			{
+				date = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public LastMessage LastMessage
+		{
+			get { return lastMessage; }
+			set
+			{
+				lastMessage = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public UserItemViewModel(int id, string dispayName, DateTime date, Gliph gliph, LastMessage lastMessage)
 		{
 			Id = id;
-			DisplayMember = displayMember;
+			DisplayName = dispayName;
+			Date = date;
+			Gliph = gliph;
+			LastMessage = lastMessage;
 		}
 	}
 }

@@ -1,6 +1,5 @@
-﻿using MarmotVoipClient.DataAccess;
+﻿using MarmotVoipClient.DataAccess.DAO;
 using MarmotVoipClient.Model;
-using MarmotVoipClient.Model.Data;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,20 +7,28 @@ namespace MarmotVoipClient.UI.Data.Lookups
 {
 	public class ContactLookupDataService : IContactLookupDataService
 	{
-		private readonly ContactsDAO ContactsDAO;
+		private readonly MessagesDAO messagesDAO;
+		private readonly ContactDisplayItemDAO contactDisplayItemDAO;
 
-		public ContactLookupDataService(ContactsDAO contactsDAO)
+		public ContactLookupDataService(ContactDisplayItemDAO contactDisplayItemDAO,
+			MessagesDAO messagesDAO)
 		{
-			ContactsDAO = contactsDAO;
+			this.messagesDAO = messagesDAO;
+			this.contactDisplayItemDAO = contactDisplayItemDAO;
 		}
 
-		public IEnumerable<ContactLookupItem> GetLookups()
+		public IEnumerable<ContactLookupItem> GetContactLookups()
 		{
-			IEnumerable<Contact> contacts = ContactsDAO.GetAll();
-			return contacts.Select(contact => new ContactLookupItem()
+			var contacts = contactDisplayItemDAO.GetAll();
+			// TODO: Get contact of my user!
+
+			// 
+			return contacts.Select(contactDisplay => new ContactLookupItem()
 			{
-				Id = contact.Id,
-				DisplayMember = $"{contact.FirstName} {contact.LastName}"
+				Id = contactDisplay.Contact.Id,
+				DisplayMember = $"{contactDisplay.Contact.FirstName} {contactDisplay.Contact.LastName}",
+				Gliph = contactDisplay.Gliph,
+				LastMessage = messagesDAO.GetLastFromTo
 			});
 		}
 	}

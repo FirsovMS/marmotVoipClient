@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MarmotVoipClient.DataAccess
 {
-	public static class Constants
+	public static class Requests
 	{
 #if DEBUG
 		// Use Your Root Path ToSource Folder
@@ -79,8 +79,27 @@ namespace MarmotVoipClient.DataAccess
 
 		#endregion
 
-
-
 		public static readonly string DA_GET_CALL_TYPE_BY_ID_FMT = "SELECT description FROM CallType where id = {0}";
+
+		#region ContactDisplayItem
+
+		public static readonly string DA_CONTACT_DISPLAY_ITEM_GET_ALL = "select B.contact_id, B.first_name, B.last_name, B.sip, A.color, A.short_name from ContactDisplayItem as A inner join Contacts as B on A.contact_id = B.contact_id";
+
+		public static readonly string DA_CONTACT_DISPLAY_ITEM_GET_BY_ID_FMT = "select B.contact_id, B.first_name, B.last_name, B.sip, A.color, A.short_name from ContactDisplayItem as A inner join Contacts as B on A.contact_id = B.contact_id where B.contact_id = {0}";
+
+		public static readonly string DA_CONTACT_DISPLAY_ITEM_REMOVE_FMT = "delete from ContactDisplayItem where contact_id = {0};";
+
+		public static readonly string DA_CONTACT_DISPLAY_ITEM_UPDATE_FMT = "update ContactDisplayItem set color = '{1}', short_name = '{2}' where contact_id = {0};";
+
+		#endregion
+
+
+		#region Messages
+
+		public static readonly string DA_MESSAGES_GET_FROM_TO_FMT = "SELECT msg_id, contact_from, contact_to, text, msg_result, date FROM (SELECT * FROM Messages WHERE contact_from = {0} and contact_to = {1} union SELECT  * FROM Messages WHERE contact_to = {0} and contact_from = {1}) as T ORDER BY date ASC;";
+
+		public static readonly string DA_MESSAGES_GET_LAST_FROM_TO_FMT = "SELECT msg_id, contact_from, contact_to, text, msg_result, date FROM (SELECT * FROM Messages WHERE contact_from = {0} and contact_to = {1} union SELECT  * FROM Messages WHERE contact_to = {0} and contact_from = {1}) as T WHERE date = (SELECT MAX(date) FROM Messages);";
+
+		#endregion
 	}
 }

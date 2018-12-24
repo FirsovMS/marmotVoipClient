@@ -1,4 +1,5 @@
-﻿using MarmotVoipClient.UI.ViewModel;
+﻿using MahApps.Metro.Controls;
+using MarmotVoipClient.UI.ViewModel;
 using System.Windows;
 
 namespace MarmotVoipClient.UI
@@ -6,8 +7,8 @@ namespace MarmotVoipClient.UI
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
-    {
+	public partial class MainWindow : MetroWindow
+	{
 		private readonly MainViewModel viewModel;
 
 		public MainWindow(MainViewModel viewModel)

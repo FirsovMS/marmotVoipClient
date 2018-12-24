@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using DAL;
 using MarmotVoipClient.DataAccess;
+using MarmotVoipClient.DataAccess.DAO;
 using MarmotVoipClient.UI.Data;
 using MarmotVoipClient.UI.Data.Lookups;
 using MarmotVoipClient.UI.ViewModel;
@@ -16,7 +17,7 @@ namespace MarmotVoipClient.UI.Startup
 
 			builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
 
-			var dataAccessLayer = new DataAccessLayer(Constants.CONNECTION_STRING);
+			var dataAccessLayer = new DataAccessLayer(Requests.CONNECTION_STRING);
 			builder.RegisterInstance(dataAccessLayer).AsSelf();			
 			builder.RegisterType<ContactsDAO>().AsSelf().SingleInstance();
 

@@ -1,5 +1,5 @@
 ﻿using LoggingAPI;
-using MarmotVoipClient.DataAccess;
+using MarmotVoipClient.DataAccess.DAO;
 using MarmotVoipClient.Model.Data;
 
 namespace MarmotVoipClient.UI.Data

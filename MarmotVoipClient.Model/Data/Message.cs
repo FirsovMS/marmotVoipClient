@@ -14,6 +14,6 @@ namespace MarmotVoipClient.Model.Data
 		[Required]
 		public DateTime Date { get; set; }
 
-		public bool IsDelivered { get; set; }
+		public Enums.MessageResultStatus MessageResultStatus { get; set; }
 	}
 }

@@ -16,5 +16,11 @@ namespace MarmotVoipClient.Model
 			Outcoming = 2,
 			Rejected = 3
 		}
+
+		public enum MessageResultStatus
+		{
+			Delivered,
+			Error
+		}
 	}
 }

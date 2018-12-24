@@ -14,8 +14,17 @@
 				<!-- Accent and AppTheme setting -->
 				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+				<!--AnimatedTabControl-->
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
 				<!-- Custom Resources -->
 				<ResourceDictionary>
+					<BooleanToVisibilityConverter x:Key="BoolToVis" />
+					
+					<Style TargetType="TextBlock">
+						<Setter Property="FontFamily" Value="Calibri"/>
+						<Setter Property="FontSize" Value="14"/>
+					</Style>
+					
 					<Style TargetType="TextBox">
 						<Setter Property="Validation.ErrorTemplate">
 							<Setter.Value>

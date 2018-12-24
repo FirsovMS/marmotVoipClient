@@ -5,6 +5,6 @@ namespace MarmotVoipClient.UI.Data.Lookups
 {
 	public interface IContactLookupDataService
 	{
-		IEnumerable<ContactLookupItem> GetLookups();
+		IEnumerable<ContactLookupItem> GetContactLookups();
 	}
 }

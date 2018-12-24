@@ -1,5 +1,4 @@
 ﻿using MarmotVoipClient.Model;
-using MarmotVoipClient.UI.Data;
 using MarmotVoipClient.UI.Data.Lookups;
 using MarmotVoipClient.UI.Events;
 using Prism.Commands;
@@ -61,18 +60,31 @@ namespace MarmotVoipClient.UI.ViewModel
 		{
 			this.contactDataService = contactDataService;
 			this.eventAggregator = eventAggregator;
+
 			Contacts = new ObservableCollection<UserItemViewModel>();
+			SearchText = string.Empty;
+
 			MenuCommand = new DelegateCommand(OnMenuCommandExecute);
 		}
 
 		public void Load()
 		{
-			var lookups = contactDataService.GetLookups();
+			var lookups = contactDataService.GetContactLookups();
 
 			Contacts.Clear();
+			// TODO: Remove mock Gliph, LastMessage element
 			foreach (var item in lookups)
 			{
-				Contacts.Add(new UserItemViewModel(item.Id, item.DisplayMember));
+				Contacts.Add(new UserItemViewModel(item.Id, item.DisplayMember, DateTime.Now,
+					new Gliph()
+					{
+						Color = "#27E846",
+						Text = "AS"
+					}, new LastMessage()
+					{
+						IsPrefix = true,
+						Text = "latesMessage"
+					}));
 			}
 		}
 

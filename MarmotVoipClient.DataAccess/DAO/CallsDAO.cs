@@ -9,7 +9,7 @@ using System.Data;
 using Addititonals;
 using static MarmotVoipClient.Model.Enums;
 
-namespace MarmotVoipClient.DataAccess
+namespace MarmotVoipClient.DataAccess.DAO
 {
 	public class CallsDAO : BaseDAO, IBaseActions<CallItem>
 	{
@@ -22,7 +22,7 @@ namespace MarmotVoipClient.DataAccess
 			var contactID = value.Id.ToString();
 			var callDirection = ((int)value.CallType).ToString();
 
-			var query = queryBuilder.Add(Constants.DA_CALL_INSERT_RECORD_FMT)
+			var query = QueryBuilder.Add(Requests.DA_CALL_INSERT_RECORD_FMT)
 				.AddParams(contactID, callDirection)
 				.Build();
 
@@ -35,11 +35,11 @@ namespace MarmotVoipClient.DataAccess
 
 			try
 			{
-				result = DAL.ExecuteQuery(Constants.DA_CALLS_GET_ALL, row => CallHandler(row));
+				result = DAL.ExecuteQuery(Requests.DA_CALLS_GET_ALL, row => DataHandlers.CallHandler(row));
 			}
 			catch (Exception ex)
 			{
-				Logger.Error("Can't get all CallItems!", ex, Level.Error, Constants.DA_CALLS_GET_ALL);
+				Logger.Error("Can't get all CallItems!", ex, Level.Error, Requests.DA_CALLS_GET_ALL);
 			}
 			return result;
 		}
@@ -49,13 +49,13 @@ namespace MarmotVoipClient.DataAccess
 			IEnumerable<CallItem> result = null;
 
 			var ownerID = owner.Id.ToString();
-			var query = queryBuilder.Add(Constants.DA_CALLS_GET_BY_FROM_OR_TO_FMT)
+			var query = QueryBuilder.Add(Requests.DA_CALLS_GET_BY_FROM_OR_TO_FMT)
 				.AddParams(ownerID, ownerID)
 				.Build();
 
 			try
 			{
-				result = DAL.ExecuteQuery(query, row => CallHandler(row));
+				result = DAL.ExecuteQuery(query, row => DataHandlers.CallHandler(row));
 			}
 			catch (Exception ex)
 			{
@@ -68,12 +68,12 @@ namespace MarmotVoipClient.DataAccess
 		{
 			IEnumerable<CallItem> result = null;
 
-			var query = queryBuilder.Add(Constants.DA_CALLS_GET_BY_TIME_RANGE_FMT)
+			var query = QueryBuilder.Add(Requests.DA_CALLS_GET_BY_TIME_RANGE_FMT)
 				.AddParams(start.ToSQLiteTimeFormat(), end.ToSQLiteTimeFormat())
 				.Build();
 			try
 			{
-				result = DAL.ExecuteQuery(query, row => CallHandler(row));
+				result = DAL.ExecuteQuery(query, row => DataHandlers.CallHandler(row));
 			}
 			catch (Exception ex)
 			{
@@ -86,13 +86,13 @@ namespace MarmotVoipClient.DataAccess
 		{
 			IEnumerable<CallItem> result = null;
 
-			var query = queryBuilder.Add(Constants.DA_CALLS_GET_BY_TYPE)
+			var query = QueryBuilder.Add(Requests.DA_CALLS_GET_BY_TYPE)
 				.AddParams(((int)callType).ToString())
 				.Build();
 
 			try
 			{
-				result = DAL.ExecuteQuery(query, row => CallHandler(row));
+				result = DAL.ExecuteQuery(query, row => DataHandlers.CallHandler(row));
 			}
 			catch (Exception ex)
 			{
@@ -104,14 +104,14 @@ namespace MarmotVoipClient.DataAccess
 		public bool TryGet(int id, out CallItem value)
 		{
 			bool opResult = false;
-			var query = queryBuilder.Add(Constants.DA_CALLS_GET_BY_ID_FMT)
+			var query = QueryBuilder.Add(Requests.DA_CALLS_GET_BY_ID_FMT)
 				.AddParams(id.ToString())
 				.Build();
 
 			value = null;
 			try
 			{
-				var result = DAL.ExecuteQuery(query, row => CallHandler(row))?.FirstOrDefault();
+				var result = DAL.ExecuteQuery(query, row => DataHandlers.CallHandler(row))?.FirstOrDefault();
 
 				opResult = result != null;
 				if (opResult)
@@ -128,7 +128,7 @@ namespace MarmotVoipClient.DataAccess
 
 		public bool TryRemove(CallItem value)
 		{
-			var query = queryBuilder.Add(Constants.DA_CALL_REMOVE_BY_ID_FMT)
+			var query = QueryBuilder.Add(Requests.DA_CALL_REMOVE_BY_ID_FMT)
 				.AddParams(value.Id.ToString())
 				.Build();
 
@@ -137,25 +137,12 @@ namespace MarmotVoipClient.DataAccess
 
 		public bool TryUpdate(CallItem value)
 		{
-			var query = queryBuilder.Add(Constants.DA_CALL_UPDATE_RECORD_BY_ID_FMT)
+			var query = QueryBuilder.Add(Requests.DA_CALL_UPDATE_RECORD_BY_ID_FMT)
 				.AddParams(value.Id.ToString(), value.SourceId.ToString(), value.DestinationId.ToString(), ((int)value.CallType).ToString(),
 					value.TimeStart.ToString(), value.TimeEnd.ToString())
 				.Build();
 
 			return DAL.TryExecuteUpdate(query);
-		}
-
-		private static CallItem CallHandler(IDataReader row)
-		{
-			return new CallItem()
-			{
-				Id = Convert.ToInt32(row["call_id"]),
-				SourceId = Convert.ToInt32(row["from_id"]),
-				DestinationId = Convert.ToInt32(row["to_id"]),
-				CallType = (Enums.CallType)Convert.ToInt32(row["call_type"]),
-				TimeStart = DateTime.Parse(row["time_start"].ToString()),
-				TimeEnd = DateTime.Parse(row["time_end"].ToString())
-			};
 		}
 	}
 }
