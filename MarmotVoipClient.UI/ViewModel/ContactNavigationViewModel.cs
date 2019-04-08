@@ -1,10 +1,13 @@
-﻿using MarmotVoipClient.Model;
+﻿using Autofac;
+using MarmotVoipClient.Model;
 using MarmotVoipClient.UI.Data.Lookups;
 using MarmotVoipClient.UI.Events;
+using MarmotVoipClient.UI.View;
 using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace MarmotVoipClient.UI.ViewModel
@@ -13,9 +16,9 @@ namespace MarmotVoipClient.UI.ViewModel
 	{
 		private IContactLookupDataService contactDataService;
 		private IEventAggregator eventAggregator;
-		private string searchText;
 		private ObservableCollection<UserItemViewModel> contacts;
 		private UserItemViewModel selectedContact;
+		private string searchText;
 
 		public string SearchText
 		{
@@ -53,7 +56,7 @@ namespace MarmotVoipClient.UI.ViewModel
 			}
 		}
 
-		public ICommand MenuCommand { get; }
+		public ICommand SettingsMenuCommand { get; }
 
 		public ContactNavigationViewModel(IContactLookupDataService contactDataService,
 			IEventAggregator eventAggregator)
@@ -64,7 +67,7 @@ namespace MarmotVoipClient.UI.ViewModel
 			Contacts = new ObservableCollection<UserItemViewModel>();
 			SearchText = string.Empty;
 
-			MenuCommand = new DelegateCommand(OnMenuCommandExecute);
+			SettingsMenuCommand = new DelegateCommand(OnSettingsMenuCommandExecute);
 		}
 
 		public void Load()
@@ -88,9 +91,20 @@ namespace MarmotVoipClient.UI.ViewModel
 			}
 		}
 
-		private void OnMenuCommandExecute()
+		private void OnSettingsMenuCommandExecute()
 		{
-			throw new NotImplementedException();
+			var settingsMenu = App.Container.Resolve<SettingsView>();
+
+			var dialogResult = settingsMenu.ShowDialog();
+			if (dialogResult == DialogResult.Yes)
+			{
+				// TODO: Update new value
+				var propertyBag = settingsMenu.SettingsViewModel.PropertyBag;
+				if (propertyBag.Any())
+				{
+
+				}
+			}
 		}
 	}
 }

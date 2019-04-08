@@ -11,17 +11,17 @@
 					  MinHeight="400" MinWidth="364" MaxWidth="800"
 					  BorderThickness="0" GlowBrush="Black" ResizeMode="CanResize"
 					  NonActiveWindowTitleBrush="Gray" NonActiveGlowBrush="Red" WindowTransitionsEnabled="False">
-	<Window.Resources>
-		<DataTemplate DataType="{x:Type viewModel:MessageDialogViewModel}">
-			<view:MessageDialogView/>
-		</DataTemplate>
-	</Window.Resources>
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="364"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-		<view:ContactNavigationView Grid.Column="0" DataContext="{Binding ContactNavigation}"/>
-		<ContentControl Grid.Column="1" DataContext="{Binding MessageDialog}"/>
-	</Grid>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:MessageDialogViewModel}">
+            <view:MessageDialogView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="364"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <view:ContactNavigationView Grid.Column="0" DataContext="{Binding ContactNavigation}"/>
+        <ContentControl Grid.Column="1" DataContext="{Binding MessageDialog}"/>
+    </Grid>
 </Controls:MetroWindow>

@@ -12,8 +12,8 @@ namespace MarmotVoipClient.UI
 		private readonly MainViewModel viewModel;
 
 		public MainWindow(MainViewModel viewModel)
-        {
-            InitializeComponent();
+		{
+			InitializeComponent();
 
 			this.viewModel = viewModel;
 			DataContext = this.viewModel;

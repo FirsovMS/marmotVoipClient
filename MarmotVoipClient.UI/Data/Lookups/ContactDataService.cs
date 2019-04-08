@@ -2,7 +2,7 @@
 using MarmotVoipClient.DataAccess.DAO;
 using MarmotVoipClient.Model.Data;
 
-namespace MarmotVoipClient.UI.Data
+namespace MarmotVoipClient.UI.Data.Lookups
 {
 	public class ContactDataService : IContactDataService
 	{

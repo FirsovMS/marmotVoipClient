@@ -1,6 +1,6 @@
 ﻿using MarmotVoipClient.Model.Data;
 
-namespace MarmotVoipClient.UI.Data
+namespace MarmotVoipClient.UI.Data.Lookups
 {
 	public interface IContactDataService
 	{

@@ -5,47 +5,47 @@
              Startup="Application_Startup"
              DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
-				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-				<!-- Accent and AppTheme setting -->
-				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-				<!--AnimatedTabControl-->
-				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
-				<!-- Custom Resources -->
-				<ResourceDictionary>
-					<BooleanToVisibilityConverter x:Key="BoolToVis" />
-					
-					<Style TargetType="TextBlock">
-						<Setter Property="FontFamily" Value="Calibri"/>
-						<Setter Property="FontSize" Value="14"/>
-					</Style>
-					
-					<Style TargetType="TextBox">
-						<Setter Property="Validation.ErrorTemplate">
-							<Setter.Value>
-								<ControlTemplate>
-									<StackPanel>
-										<AdornedElementPlaceholder x:Name="placeholder"/>
-										<TextBlock FontSize="12" Foreground="Red" 
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <!-- Accent and AppTheme setting -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <!--AnimatedTabControl-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <!-- Custom Resources -->
+                <ResourceDictionary>
+                    <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontFamily" Value="Calibri"/>
+                        <Setter Property="FontSize" Value="14"/>
+                    </Style>
+
+                    <Style TargetType="TextBox">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <StackPanel>
+                                        <AdornedElementPlaceholder x:Name="placeholder"/>
+                                        <TextBlock FontSize="12" Foreground="Red" 
 									   Text="{Binding ElementName=placeholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
-									</StackPanel>
-								</ControlTemplate>
-							</Setter.Value>
-						</Setter>
-						<Style.Triggers>
-							<Trigger Property="Validation.HasError" Value="True">
-								<Setter Property="Background" Value="Red"/>
-								<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
-							</Trigger>
-						</Style.Triggers>
-					</Style>
-				</ResourceDictionary>
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
+                                    </StackPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Background" Value="Red"/>
+                                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

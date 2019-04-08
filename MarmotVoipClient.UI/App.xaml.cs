@@ -12,20 +12,27 @@ namespace MarmotVoipClient.UI
 	/// </summary>
 	public partial class App : Application
 	{
+		private static readonly IContainer _container = new Bootstrapper().Bootstrap();
+
+		public static IContainer Container
+		{
+			get
+			{
+				return _container;
+			}
+		}
+
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
-			var bootrstrapper = new Bootstrapper();
-			var container = bootrstrapper.Bootstrap();
-
 			try
 			{
-				var mainWindow = container.Resolve<MainWindow>();
+				var mainWindow = Container.Resolve<MainWindow>();
 				mainWindow.Show();
 			}
 			catch (Exception ex)
 			{
 				Logger.Error(description: "MainWindow not created!", exception: ex, logLevel: Level.Fatal);
-				MessageBox.Show("Application not created! See log file for more information", "Startup Error");
+				MessageBox.Show("Application not created! See log file for more detailed information", "Startup Error");
 				Current.Shutdown();
 			}
 		}

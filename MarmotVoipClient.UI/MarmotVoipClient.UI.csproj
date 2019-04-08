@@ -71,6 +71,9 @@
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="lindotnet">
+      <HintPath>..\lindotnet.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -108,10 +111,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Constants.cs" />
-    <Compile Include="Data\ContactDataService.cs" />
-    <Compile Include="Data\IContactDataService.cs" />
+    <Compile Include="Data\Lookups\ContactDataService.cs" />
+    <Compile Include="Data\Lookups\IContactDataService.cs" />
     <Compile Include="Data\Lookups\IContactLookupDataService.cs" />
     <Compile Include="Data\Lookups\ContactLookupDataService.cs" />
+    <Compile Include="Data\Lookups\ISoftPhoneService.cs" />
+    <Compile Include="Data\Repositories\AccountRepository.cs" />
+    <Compile Include="Data\Repositories\IAccountRepository.cs" />
     <Compile Include="Events\OpenMessageDialogViewEvent.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
     <Compile Include="ViewModel\ContactNavigationViewModel.cs" />
@@ -120,6 +126,9 @@
     <Compile Include="ViewModel\IMessageDialogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MessageDialogViewModel.cs" />
+    <Compile Include="ViewModel\OkCancelDialogView.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\Settings\AccountSettingsViewModel.cs" />
     <Compile Include="ViewModel\UserItemViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\ContactNavigationView.xaml.cs">
@@ -127,6 +136,21 @@
     </Compile>
     <Compile Include="View\MessageDialogView.xaml.cs">
       <DependentUpon>MessageDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Settings\AccountSettingsUC.xaml.cs">
+      <DependentUpon>AccountSettingsUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Settings\AdvancedSettings.xaml.cs">
+      <DependentUpon>AdvancedSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Settings\ApplicationSettingsUC.xaml.cs">
+      <DependentUpon>ApplicationSettingsUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Settings\DevicesAndCodecsSettings.xaml.cs">
+      <DependentUpon>DevicesAndCodecsSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wrapper\MessageWrapper.cs" />
     <Compile Include="Wrapper\ModelWrapper.cs" />
@@ -144,10 +168,30 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\ContactNavigationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MessageDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MessageDialogView.xaml">
+    <Page Include="View\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Settings\AccountSettingsUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Settings\AdvancedSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Settings\ApplicationSettingsUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Settings\DevicesAndCodecsSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,6 +214,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="data.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -180,7 +227,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Repositories\" />
     <Folder Include="View\CustomControls\" />
   </ItemGroup>
   <ItemGroup>

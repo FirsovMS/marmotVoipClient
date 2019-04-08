@@ -1,5 +1,6 @@
 ﻿using DAL;
 using MarmotVoipClient.DataAccess;
+using MarmotVoipClient.DataAccess.DAO;
 using MarmotVoipClient.Model.Data;
 using NUnit.Framework;
 using System;

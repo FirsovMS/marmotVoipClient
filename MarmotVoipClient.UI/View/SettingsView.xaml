@@ -1,0 +1,45 @@
+﻿<Controls:MetroWindow x:Class="MarmotVoipClient.UI.View.SettingsView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:settingsView="clr-namespace:MarmotVoipClient.UI.View.Settings"
+                      xmlns:viewModel="clr-namespace:MarmotVoipClient.UI.ViewModel.Settings"
+                      MinHeight="400" MinWidth="500"
+                      MaxHeight="800" MaxWidth="900"
+                      mc:Ignorable="d"
+                      Title="Settings">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Controls:MetroAnimatedTabControl Controls:TabControlHelper.Underlined="SelectedTabItem" FontSize="14" Padding="2 4">
+            <Controls:MetroTabItem Header="Account Settings">
+                <settingsView:AccountSettingsUC />
+            </Controls:MetroTabItem>
+            <Controls:MetroTabItem Header="Application">
+                <settingsView:ApplicationSettingsUC />
+            </Controls:MetroTabItem>
+            <Controls:MetroTabItem Header="Devices and Codecs">
+                <settingsView:DevicesAndCodecsSettings />
+            </Controls:MetroTabItem>
+            <Controls:MetroTabItem Header="Advanced">
+                <settingsView:AdvancedSettings />
+            </Controls:MetroTabItem>
+        </Controls:MetroAnimatedTabControl>
+
+        <Grid Grid.Row="2" Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Width="125" Height="36" Grid.Column="1" Margin="5 0" Content="OK" Command="{Binding ApplyCommand}"/>
+            <Button Width="125" Height="36" Grid.Column="2" Content="Cancel" Command="{Binding CancelCommand}"/>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

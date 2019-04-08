@@ -1,6 +1,6 @@
 ﻿namespace MarmotVoipClient.Model
 {
-	public class Gliph
+	public struct Gliph
 	{
 		public string Color { get; set; }
 

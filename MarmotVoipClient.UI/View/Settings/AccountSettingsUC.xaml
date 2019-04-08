@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="MarmotVoipClient.UI.View.Settings.AccountSettingsUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Account Data-->
+        <GroupBox Grid.Row="0" Header="User Details">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Account Name:" Margin="5"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding AccountData.AccountName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="User ID:" Margin="5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding AccountData.UserID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Domain:" Margin="5"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding AccountData.Domain, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Password:" Margin="5"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding AccountData.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            </Grid>
+        </GroupBox>
+
+        <!--Domain Proxy-->
+        <GroupBox Grid.Row="1" Header="Domain Proxy" Margin="0 4 0 0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <CheckBox Grid.Row="0" Content="Use Proxy" IsEnabled="{Binding DomainData.IsProxyUsed}" Margin="5"/>
+                <TextBlock Grid.Row="1" Text="Send outbound via:" Margin="5"/>
+                <StackPanel Grid.Row="2" Orientation="Vertical">
+                    <RadioButton Content="Domain" IsChecked="{Binding DomainData.IsDomainSelected}" Margin="15 2"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <RadioButton Content="Proxy Address:" IsChecked="{Binding DomainData.IsProxyAddressSelected}" Margin="10 2"/>
+                        <TextBox Text="{Binding DomainData.ProxyAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 IsEnabled="{Binding IsProxyAddressBoxEnabled}" Width="150"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>
